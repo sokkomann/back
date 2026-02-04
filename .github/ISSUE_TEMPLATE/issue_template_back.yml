@@ -3,11 +3,6 @@ description: "새로운 서비스 기능이나 API 작업을 정의합니다."
 title: "[FEAT] 서비스명 - 기능 요약"
 labels: ["feat", "backend"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 💡 기능 구현 제안
-        백엔드 서버에 추가될 새로운 기능에 대해 설명해주세요.
   - type: input
     id: domain
     attributes:
