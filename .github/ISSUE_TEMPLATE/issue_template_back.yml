@@ -1,45 +1,44 @@
-name: "🚀 Feature Request"
-description: "새로운 서비스 기능 구현을 제안하거나 기획합니다."
-title: "[FEAT] 서비스명: 기능 요약"
+name: "🚀 Feature: 신규 기능 구현"
+description: "새로운 서비스 기능이나 API 작업을 정의합니다."
+title: "[FEAT] 서비스명 - 기능 요약"
 labels: ["feat", "backend"]
 body:
   - type: markdown
     attributes:
       value: |
-        ## 📝 기능 명세
-        작업할 내용에 대해 명확하게 기술해주세요.
+        ## 💡 기능 구현 제안
+        백엔드 서버에 추가될 새로운 기능에 대해 설명해주세요.
   - type: input
     id: domain
     attributes:
       label: "📌 서비스 도메인"
-      placeholder: "예: Member, Order, Auth, Global"
+      placeholder: "예: User, Order, Payment 등"
     validations:
       required: true
   - type: textarea
-    id: requirement
+    id: description
     attributes:
       label: "📖 상세 요구사항"
-      description: "무엇을 개발해야 하는지, 기획 의도가 무엇인지 적어주세요."
-      placeholder: "예: 카카오 소셜 로그인 기능을 추가하고, 가입 시 환영 메일을 발송해야 함."
-    validations:
-      required: true
-  - type: textarea
-    id: api_spec
-    attributes:
-      label: "🔗 API 명세 (필요 시)"
-      description: "작업 예정인 API 경로와 HTTP Method를 적어주세요."
-      placeholder: "GET /api/v1/members/profile"
-- type: textarea
+      description: "어떤 로직이 필요한지 상세히 적어주세요."
+      placeholder: "비즈니스 로직 Flow, 외부 API 연동 여부 등"
+  - type: checkboxes
     id: todo_list
     attributes:
-      label: "✅ To-Do List (진행 상황)"
-      description: "이슈 생성 후, 작업이 완료될 때마다 체크([x])해주세요."
-      value: |
-        - [ ] 엔티티 설계 및 JPA 매핑 확인
-        - [ ] 비즈니스 로직(Service) 구현 및 예외 처리
-        - [ ] API 컨트롤러(Controller) 및 DTO 개발
-        - [ ] JUnit5 기반 단위 테스트 및 통합 테스트 작성
-        - [ ] API 문서화 (Swagger/RestDocs) 반영
-    validations:
-      required: true
-
+      label: "✅ To-Do List (작업 범위)"
+      description: "이번 이슈에서 진행할 작업 항목을 선택해주세요."
+      options:
+        - label: "엔티티(Entity) 설계 및 JPA 매핑"
+        - label: "비즈니스 로직(Service) 구현 및 예외 처리"
+        - label: "API 컨트롤러(Controller) 및 DTO 개발"
+        - label: "JUnit5 기반 단위 및 통합 테스트 작성"
+        - label: "Swagger/RestDocs API 문서화"
+        - label: "DB 스키마 변경(Migration) 필요 여부 확인"
+  - type: checkboxes
+    id: final_checks
+    attributes:
+      label: "🏁 최종 확인 사항"
+      options:
+        - label: "기존의 공통 API 응답 규격을 확인했나요?"
+          required: true
+        - label: "팀 내 코딩 컨벤션을 준수할 준비가 되었나요?"
+          required: true
