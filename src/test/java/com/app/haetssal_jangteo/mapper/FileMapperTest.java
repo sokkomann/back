@@ -33,4 +33,10 @@ public class FileMapperTest {
         fileMapper.insertFileItem(fileItemDTO.toFileItemVO());
     }
 
+    @Test
+    public void testDelete() {
+        fileMapper.deleteFileItem(16L);
+        fileMapper.delete(16L);
+    }
+
 }
