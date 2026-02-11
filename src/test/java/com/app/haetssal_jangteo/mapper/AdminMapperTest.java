@@ -14,27 +14,27 @@ import java.util.Optional;
 @Slf4j
 public class AdminMapperTest {
 
-//    @Autowired
-//    private AdminMapper adminMapper;
+    @Autowired
+    private AdminMapper adminMapper;
 
     @Test
     public void testInsert() {
-//        ItemDTO itemDTO = new ItemDTO();
-//        itemDTO.setId(1L);
-//        itemDTO.setItemStoreId(2L);
-//        itemDTO.setItemCategoryId(100L);
-//        itemDTO.setItemName("사과 박스");
-//        itemDTO.setItemPrice("15000");
-//        itemDTO.setItemStock("40");
-//        itemDTO.setItemContent("사과 1 BOX (10KG)");
-//
-//        adminMapper.insert(itemDTO);
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setId(5L);
+        itemDTO.setItemStoreId(2L);
+        itemDTO.setItemCategoryId(100L);
+        itemDTO.setItemName("사과 박스");
+        itemDTO.setItemPrice("15000");
+        itemDTO.setItemStock("40");
+        itemDTO.setItemContent("사과 1 BOX (10KG)");
+
+        adminMapper.insert(itemDTO);
     }
 
     @Test
     public void testSelectById() {
-//        Optional<ItemVO> founditem = adminMapper.selectById(1L);
-//        log.info("{}........", founditem);
+        Optional<ItemVO> founditem = adminMapper.selectById(1L);
+        log.info("{}........", founditem);
     }
 }
 
