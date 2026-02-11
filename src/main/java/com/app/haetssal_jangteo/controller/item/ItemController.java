@@ -27,9 +27,12 @@ public class ItemController {
 
     @PostMapping("/write")
     public RedirectView write(ItemDTO itemDTO,
-//                              @RequestParam("file") ArrayList<MultipartFile> multipartFile,
+                              @RequestParam("itemThumbnail") ArrayList<MultipartFile> itemThumbnails,
+                              @RequestParam("itemDescImages") ArrayList<MultipartFile> itemDescImages,
+                              @RequestParam("itemSellerImages") ArrayList<MultipartFile> itemSellerImages,
+                              @RequestParam("itemRefundImages") ArrayList<MultipartFile> itemRefundImages,
                               RedirectAttributes redirectAttributes) {
-        itemService.save(itemDTO);
+        itemService.save(itemDTO, itemThumbnails, itemDescImages, itemSellerImages, itemRefundImages);
         redirectAttributes.addAttribute("id", itemDTO.getId());
         return new RedirectView("/detail");
     }

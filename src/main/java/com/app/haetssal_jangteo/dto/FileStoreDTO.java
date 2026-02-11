@@ -15,8 +15,8 @@ public class FileStoreDTO {
     private Long id;
     private Filetype fileType;
     private String fileName;
+    private String fileOriginName;
     private String fileSavedPath;
-    private String fileOriginPath;
     private String fileSize;
     private String createdDatetime;
 
@@ -27,8 +27,8 @@ public class FileStoreDTO {
                 .id(id)
                 .fileType(fileType)
                 .fileName(fileName)
+                .fileOriginName(fileOriginName)
                 .fileSavedPath(fileSavedPath)
-                .fileOriginPath(fileOriginPath)
                 .fileSize(fileSize)
                 .createdDatetime(createdDatetime)
                 .build();

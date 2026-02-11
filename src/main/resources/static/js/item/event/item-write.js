@@ -37,6 +37,10 @@ const categoryB = document.querySelector(
 // 상품 이미지 프리뷰 부분
 const itemImageContainer = document.querySelector(".img-container");
 
+// 상품 리셋 버튼
+const itemThumbnailDiv = document.getElementById("item-image");
+const imageResetButton = itemThumbnailDiv.querySelector(".reset-btn");
+
 // 전송 전 검증 용 배열
 const itemInfo = {
     itemName: "",
@@ -195,11 +199,12 @@ itemImagesInput.addEventListener("change", (e) => {
     const files = Array.from(e.target.files);
 
     // 최대 5장 제한 체크
-    const remainingSlots = MAX_ITEM_IMAGES - itemInfo.itemImages.length;
+    const remainingSlots = MAX_ITEM_IMAGES - itemInfo.itemThumbnail.length;
     const addImages = files.slice(0, remainingSlots);
 
     if (files.length > remainingSlots) {
         alert(`최대 ${MAX_ITEM_IMAGES}장 까지만 등록할 수 있습니다.`);
+        return;
     }
 
     itemInfo.itemThumbnail.push(...addImages);
@@ -207,7 +212,7 @@ itemImagesInput.addEventListener("change", (e) => {
 
     renderImageCard();
 
-    itemImagesInput.value = "";
+    imageResetButton.classList.remove("off");
 });
 
 // 상품 이미지 Preview 카드 뿌리기
@@ -227,11 +232,6 @@ function renderImageCard() {
             imgBox.dataset.index = i;
 
             imgBox.innerHTML = `
-                <button class="img-delete-btn" data-index="${i}">
-                    <svg width="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                        <path d="M504.6 148.5C515.9 134.9 514.1 114.7 500.5 103.4C486.9 92.1 466.7 93.9 455.4 107.5L320 270L184.6 107.5C173.3 93.9 153.1 92.1 139.5 103.4C125.9 114.7 124.1 134.9 135.4 148.5L278.3 320L135.4 491.5C124.1 505.1 125.9 525.3 139.5 536.6C153.1 547.9 173.3 546.1 184.6 532.5L320 370L455.4 532.5C466.7 546.1 486.9 547.9 500.5 536.6C514.1 525.3 515.9 505.1 504.6 491.5L361.7 320L504.6 148.5z"/>
-                    </svg>
-                </button>
                 <img src="${e.target.result}" alt="preview-${i}">
             `;
 
@@ -242,18 +242,17 @@ function renderImageCard() {
     });
 }
 
-// 상품 프리뷰 이미지 삭제 버튼
-itemImageContainer.addEventListener("click", (e) => {
-    const deleteBtn = e.target.closest(".img-delete-btn");
+// 이미지 초기화 버튼
+imageResetButton.addEventListener("click", (e) => {
+    e.preventDefault();
 
-    if (deleteBtn) {
-        const index = parseInt(deleteBtn.dataset.index);
+    itemImagesInput.value = "";
+    itemInfo.itemThumbnail = [];
 
-        itemInfo.itemThumbnail.splice(index, 1);
+    renderImageCard();
 
-        renderImageCard();
-    }
-});
+    imageResetButton.classList.add("off");
+})
 
 // 상품 설명 이미지 Event 부분들
 const MAX_DESC_IMAGES = 3;
@@ -276,6 +275,7 @@ function handleImageUpload(files, targetArray, previewContainer) {
 
     if (files.length > remainingSlots) {
         alert(`최대 ${MAX_DESC_IMAGES}장까지만 업로드 가능합니다.`);
+        return;
     }
 
     targetArray.push(...filesToAdd);
@@ -297,11 +297,6 @@ function renderDescImage(imageArray, container) {
 
             imgBox.innerHTML = `
                 <img src="${e.target.result}" alt="preview-${i}">
-                <button class="img-delete-btn" data-index="${i}">
-                    <svg width="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                        <path d="M504.6 148.5C515.9 134.9 514.1 114.7 500.5 103.4C486.9 92.1 466.7 93.9 455.4 107.5L320 270L184.6 107.5C173.3 93.9 153.1 92.1 139.5 103.4C125.9 114.7 124.1 134.9 135.4 148.5L278.3 320L135.4 491.5C124.1 505.1 125.9 525.3 139.5 536.6C153.1 547.9 173.3 546.1 184.6 532.5L320 370L455.4 532.5C466.7 546.1 486.9 547.9 500.5 536.6C514.1 525.3 515.9 505.1 504.6 491.5L361.7 320L504.6 148.5z"/>
-                    </svg>
-                </button>
             `;
 
             container.appendChild(imgBox);
@@ -309,23 +304,6 @@ function renderDescImage(imageArray, container) {
 
         reader.readAsDataURL(file);
     });
-
-    // input 초기화
-    const input = container
-        .closest(".uploader-container")
-        .querySelector('input[type="file"]');
-    if (input) input.value = "";
-}
-
-// 공통 삭제 함수
-function deletDescImages(e, imageArray, previewContainer) {
-    const deleteBtn = e.target.closest(".img-delete-btn");
-
-    if (deleteBtn) {
-        const index = parseInt(deleteBtn.dataset.index);
-        imageArray.splice(index, 1);
-        renderDescImage(imageArray, previewContainer);
-    }
 }
 
 // 상품 설명 이미지 이벤트
@@ -335,10 +313,20 @@ itemDescImagesInput.addEventListener("change", (e) => {
         itemInfo.itemDescImages,
         descPreviewContainer,
     );
-});
 
-descPreviewContainer.addEventListener("click", (e) => {
-    deletDescImages(e, itemInfo.itemDescImages, descPreviewContainer);
+    const resetBtn = descPreviewContainer.previousElementSibling.previousElementSibling.lastElementChild;
+    resetBtn.classList.remove("off");
+
+    resetBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        itemDescImagesInput.value = "";
+        itemInfo.itemDescImages = [];
+
+        renderDescImage(itemInfo.itemDescImages, descPreviewContainer);
+
+        resetBtn.classList.add("off");
+    })
 });
 
 // 판매자 소개 이미지 이벤트
@@ -348,10 +336,20 @@ itemSellerImagesInput.addEventListener("change", (e) => {
         itemInfo.itemSellerImages,
         sellerPreviewContainer,
     );
-});
 
-sellerPreviewContainer.addEventListener("click", (e) => {
-    deletDescImages(e, itemInfo.itemSellerImages, sellerPreviewContainer);
+    const resetBtn = sellerPreviewContainer.previousElementSibling.previousElementSibling.lastElementChild;
+    resetBtn.classList.remove("off");
+
+    resetBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        itemSellerImagesInput.value = "";
+        itemInfo.itemSellerImages = [];
+
+        renderDescImage(itemInfo.itemSellerImages, sellerPreviewContainer);
+
+        resetBtn.classList.add("off");
+    })
 });
 
 // 환불/교환 정책 이미지 이벤트
@@ -361,10 +359,20 @@ itemRefundImagesInput.addEventListener("change", (e) => {
         itemInfo.itemRefundImages,
         refundPreviewContainer,
     );
-});
 
-refundPreviewContainer.addEventListener("click", (e) => {
-    deletDescImages(e, itemInfo.itemRefundImages, refundPreviewContainer);
+    const resetBtn = refundPreviewContainer.previousElementSibling.previousElementSibling.lastElementChild;
+    resetBtn.classList.remove("off");
+
+    resetBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        itemRefundImagesInput.value = "";
+        itemInfo.itemRefundImages = [];
+
+        renderDescImage(itemInfo.itemRefundImages ,refundPreviewContainer);
+
+        resetBtn.classList.add("off");
+    })
 });
 
 // 이미지들 누르면 원본 크기로 보이게 하기
@@ -420,7 +428,7 @@ viewerBackdrop.addEventListener("click", (e) => {
 
 // 상품 등록
 submitButton.addEventListener("click", (e) => {
-    const itemForm = document.querySelector("form[name=itemInfo]");
+    const itemForm = document.querySelector("form[name=itemDTO]");
 
     const requiredFields = {
         itemName: '상품명',
@@ -437,6 +445,11 @@ submitButton.addEventListener("click", (e) => {
             return;
         }
     }
+
+    console.log(itemImagesInput.files);
+    console.log(itemDescImagesInput.files);
+    console.log(itemSellerImagesInput.files);
+    console.log(itemRefundImagesInput.files);
 
     itemForm.submit();
 })

@@ -22,4 +22,9 @@ public class ItemDAO {
     public void saveOption(ItemOptionDTO option) {
         itemMapper.insertOption(option);
     }
+
+//    상품 전체 조회
+    public List<ItemDTO> findAll() {
+        return itemMapper.selectAll();
+    }
 }

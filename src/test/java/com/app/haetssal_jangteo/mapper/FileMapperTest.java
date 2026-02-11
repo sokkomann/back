@@ -22,20 +22,15 @@ public class FileMapperTest {
         FileItemDTO fileItemDTO = new FileItemDTO();
         fileItemDTO.setFileType(Filetype.IMAGE);
         fileItemDTO.setFileName("123123");
+        fileItemDTO.setFileOriginName("originName");
         fileItemDTO.setFileSavedPath("../../path");
-        fileItemDTO.setFileOriginPath("../../oripath");
         fileItemDTO.setFileSize("100L");
 
-        fileItemDTO.setItemId(1L);
-        fileItemDTO.setFileItemType(FileItemType.THUMBNAIL);
-
         fileMapper.insert(fileItemDTO);
-        fileMapper.insertFileItem(fileItemDTO.toFileItemVO());
     }
 
     @Test
     public void testDelete() {
-        fileMapper.deleteFileItem(16L);
         fileMapper.delete(16L);
     }
 

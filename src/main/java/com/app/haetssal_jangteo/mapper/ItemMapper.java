@@ -27,7 +27,7 @@ public interface ItemMapper {
     public void updateViewCount(Long id);
 
 //    전체 상품 조회
-    public List<ItemVO> selectAll();
+    public List<ItemDTO> selectAll();
 
 //    상품 옵션 전체 조회
     public List<ItemOptionVO> selectAllOptions(Long optionItemId);

@@ -97,7 +97,7 @@ public class ItemMapperTest {
 
     @Test
     public void testSelectAll() {
-        List<ItemVO> itemList = itemMapper.selectAll();
+        List<ItemDTO> itemList = itemMapper.selectAll();
         log.info("{}.......", itemList);
     }
 

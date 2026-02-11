@@ -590,6 +590,25 @@ svg:not(:root) {
     margin-right: 9px;
 }
 
+.reset-btn {
+    font-size: 12px;
+    line-height: 20px;
+    color: rgb(61, 61, 61);
+    margin-bottom: 14px;
+    border: 1px solid rgb(240, 240, 240);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    white-space: nowrap;
+    border-radius: 1px;
+    outline: 0px;
+    box-sizing: border-box;
+    font-weight: normal;
+    padding: 0px 18px;
+    background: white;
+}
+
 .uploader-preview {
     display: flex;
     width: 100%;

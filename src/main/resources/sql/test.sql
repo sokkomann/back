@@ -14,6 +14,8 @@ select * from tbl_item_option;
 
 select * from tbl_file;
 
+select * from tbl_file_item;
+
 delete from tbl_file
 where file_type = 'image';
 
