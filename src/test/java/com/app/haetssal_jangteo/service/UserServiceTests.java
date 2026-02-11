@@ -11,6 +11,4 @@ public class UserServiceTests {
     @Autowired
     private UserService userService;
 
-    @Test
-
 }
