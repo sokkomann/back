@@ -18,10 +18,10 @@ public class FileMapperTest {
     public void testInsert() {
         FileDTO fileDTO = new FileDTO();
         fileDTO.setFileType(Filetype.IMAGE);
-        fileDTO.setFileName("123123");
-        fileDTO.setFileOriginName("originName");
+        fileDTO.setFileName("userProfile");
+        fileDTO.setFileOriginName("originProfile");
         fileDTO.setFileSavedPath("../../path");
-        fileDTO.setFileSize("100L");
+        fileDTO.setFileSize("10000");
 
         fileMapper.insert(fileDTO);
     }
