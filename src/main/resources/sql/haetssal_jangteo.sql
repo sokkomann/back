@@ -15,7 +15,6 @@ create table tbl_user (
                           created_datetime datetime default current_timestamp,
                           updated_datetime datetime default current_timestamp
 );
-select * from tbl_user;
 
 -- 소셜 회원 테이블
 create table tbl_auth (
@@ -24,7 +23,6 @@ create table tbl_auth (
                           constraint fk_user_auth foreign key (id)
                               references tbl_user(id)
 );
-select * from tbl_auth;
 
 -- 판매자 테이블
 create table tbl_seller (
