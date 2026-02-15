@@ -28,6 +28,6 @@ public class ItemAPIController {
     @GetMapping("/reviews/{id}")
     public void getItemReviews(@PathVariable Long id) {
         log.info("받아온 상품 id >>>> {}", id);
-
+        // TODO
     }
 }
