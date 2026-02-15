@@ -5,6 +5,7 @@ import com.app.haetssal_jangteo.service.item.ItemService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,7 +38,11 @@ public class ItemController {
     }
 
     @GetMapping("/detail")
-    public String goToDetail(Long id) {
+    public String goToDetail(Long id, Model model) {
+        model.addAttribute("item", itemService.detail(id));
+        model.addAttribute("sameCategoryItems", itemService.getSameCategoryItems(id));
+        System.out.println("보내는 같은 카테고리 상품 개수 : " + itemService.getSameCategoryItems(id).size());
+        // 추후에 다른 상품도 받아오기
         return "/item/item-detail";
     }
 }

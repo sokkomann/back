@@ -41,7 +41,7 @@ create table tbl_market (
     id bigint unsigned PRIMARY KEY,
     market_region varchar(100) NOT NULL,
     market_name varchar(255) NOT NULL,
-    market_name varchar(255) NOT NULL,
+    market_location varchar(255) not null,
     market_state enum('active', 'inactive') default 'active',
     created_datetime datetime default current_timestamp,
     updated_datetime datetime default current_timestamp
@@ -69,8 +69,8 @@ create table tbl_store (
 
 -- 카테고리 테이블
 create table tbl_category (
-                              id bigint unsigned PRIMARY KEY,
-                              category_name varchar(100) NOT NULL
+    id bigint unsigned PRIMARY KEY,
+    category_name varchar(100) NOT NULL
 );
 
 create table tbl_sub_category (
@@ -86,6 +86,7 @@ create table tbl_item (
     id bigint unsigned auto_increment PRIMARY KEY,
     item_store_id bigint unsigned NOT NULL,
     item_category_id bigint unsigned NOT NULL,
+    item_subcategory_id bigint unsigned not null,
     item_name varchar(255) NOT NULL,
     item_type varchar(100) NOT NULL default 'normal',
     item_stock varchar(255) default '0',
@@ -99,7 +100,9 @@ create table tbl_item (
     constraint fk_item_store foreign key (item_store_id)
     references tbl_store(id),
     constraint fk_item_category foreign key (item_category_id)
-    references tbl_category(id)
+    references tbl_category(id),
+    constraint fk_item_sub_category foreign key (item_subcategory_id)
+    references tbl_sub_category(id)
 );
 
 -- 상품 옵션 테이블
@@ -136,7 +139,6 @@ create table tbl_keyword (
 
 -- 후기 테이블
 create table tbl_review (
-                            
     id bigint unsigned auto_increment PRIMARY KEY,
     review_item_id bigint unsigned NOT NULL,
     review_user_id bigint unsigned NOT NULL,
@@ -151,7 +153,6 @@ create table tbl_review (
     references tbl_item(id),
     constraint fk_review_user foreign key (review_user_id)
     references tbl_user(id)
-                            
 );
 
 -- 찜 테이블
@@ -183,6 +184,15 @@ create table tbl_file_market (
                                      references tbl_file(id),
                                  constraint fk_target_market foreign key (market_id)
                                      references tbl_market(id)
+);
+
+create table tbl_file_store (
+                                file_id bigint unsigned NOT NULL,
+                                store_id bigint unsigned NOT NULL,
+                                constraint fk_file_store foreign key (file_id)
+                                references tbl_file(id),
+                                constraint fk_target_market foreign key (store_id)
+                                references tbl_market(id)
 );
 
 create table tbl_file_item (

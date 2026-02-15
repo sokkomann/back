@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
-public class ItemMapperTest {
+public class ItemMapperTests {
 
     @Autowired
     private ItemMapper itemMapper;
@@ -36,28 +36,28 @@ public class ItemMapperTest {
     @Test
     public void testInsertOption() {
         ItemOptionDTO itemOptionDTO = new ItemOptionDTO();
-        itemOptionDTO.setOptionItemId(1L);
+        itemOptionDTO.setOptionItemId(7L);
         itemOptionDTO.setOptionName("옵션1");
         itemOptionDTO.setOptionDetail("사과 박스 1 BOX (16KG)");
         itemOptionDTO.setOptionPrice("20000");
         itemOptionDTO.setOptionStock("15");
 
         ItemOptionDTO itemOptionDTO2 = new ItemOptionDTO();
-        itemOptionDTO2.setOptionItemId(1L);
+        itemOptionDTO2.setOptionItemId(7L);
         itemOptionDTO2.setOptionName("옵션2");
         itemOptionDTO2.setOptionDetail("사과 박스 1 BOX (16KG)");
         itemOptionDTO2.setOptionPrice("25000");
         itemOptionDTO2.setOptionStock("20");
 
         ItemOptionDTO itemOptionDTO3 = new ItemOptionDTO();
-        itemOptionDTO3.setOptionItemId(1L);
+        itemOptionDTO3.setOptionItemId(7L);
         itemOptionDTO3.setOptionName("옵션3");
         itemOptionDTO3.setOptionDetail("사과 박스 1 BOX (16KG)");
         itemOptionDTO3.setOptionPrice("30000");
         itemOptionDTO3.setOptionStock("35");
 
         ItemOptionDTO itemOptionDTO4 = new ItemOptionDTO();
-        itemOptionDTO4.setOptionItemId(1L);
+        itemOptionDTO4.setOptionItemId(7L);
         itemOptionDTO4.setOptionName("옵션4");
         itemOptionDTO4.setOptionDetail("사과 박스 1 BOX (16KG)");
         itemOptionDTO4.setOptionPrice("35000");
@@ -111,6 +111,12 @@ public class ItemMapperTest {
     public void testSelectAllOptions() {
         List<ItemOptionVO> options = itemMapper.selectAllOptions(1L);
         log.info("{}..........", options);
+    }
+
+    @Test
+    public void testSelectSameCategoryItems() {
+        List<ItemDTO> itemList = itemMapper.selectSameCategoryItems(100L, 101L, 7L);
+        log.info("{}.......", itemList);
     }
 
 }

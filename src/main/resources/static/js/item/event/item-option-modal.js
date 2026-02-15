@@ -29,6 +29,7 @@ let currentOption = {
 };
 
 optionAddBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     optionModal.classList.remove("off");
 });
 

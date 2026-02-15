@@ -1,6 +1,5 @@
 package com.app.haetssal_jangteo.mapper;
 
-import com.app.haetssal_jangteo.dto.FileItemDTO;
 import com.app.haetssal_jangteo.dto.FileUserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
-public class FileUserMapperTest {
+public class FileUserMapperTests {
 
     @Autowired
     private FileUserMapper fileUserMapper;

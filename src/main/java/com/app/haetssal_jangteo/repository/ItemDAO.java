@@ -40,4 +40,9 @@ public class ItemDAO {
     public List<ItemDTO> findAll() {
         return itemMapper.selectAll();
     }
+
+//    특정 상품과 같은 카테고리의 상품 조회
+    public List<ItemDTO> findSameCategoryItems(Long categoryId, Long subCategoryId, Long thisItemId) {
+        return itemMapper.selectSameCategoryItems(categoryId, subCategoryId, thisItemId);
+    }
 }

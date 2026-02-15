@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
-public class StoreMapperTest {
+public class StoreMapperTests {
     @Autowired
     private StoreMapper storeMapper;
 

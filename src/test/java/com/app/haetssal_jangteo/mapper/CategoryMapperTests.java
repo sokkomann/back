@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
-public class CategoryMapperTest {
+public class CategoryMapperTests {
 
     @Autowired
     private CategoryMapper categoryMapper;

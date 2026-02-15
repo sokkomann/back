@@ -60,7 +60,15 @@ const prdOptionBtns = document.querySelectorAll(".each-product-option");
 
 // 1. 상품상세/리뷰 탭 눌렀을때 이벤트
 portals.forEach((portal, i) => {
-    portal.addEventListener("click", (e) => {
+    portal.addEventListener("click", async (e) => {
+        let id = portal.parentElement.dataset.id;
+        let name = portal.getAttribute("name");
+
+        if(name == "itemDesc") {
+            await itemService.getItemDescImages(id, itemLayout.showItemDescImages);
+        } else {
+            await itemService.getItemReviews(id, itemLayout.showItemReviews);
+        }
 
         mainContents.forEach((main) => {
             main.classList.remove("on");
@@ -95,6 +103,8 @@ portals.forEach((portal, i) => {
         currentTab = i;
     });
 });
+
+// document.querySelector("div[name=itemDesc]").click();
 
 // 2. 메인 대쉬보드랑 리뷰탭에서 리뷰요약 옆에 화살표 눌렀을때 이벤트(max-height랑 회전)
 ArrowsNextToKeyWord.forEach((arrow, i) => {

@@ -5,6 +5,7 @@ import com.app.haetssal_jangteo.domain.ItemVO;
 import com.app.haetssal_jangteo.dto.ItemDTO;
 import com.app.haetssal_jangteo.dto.ItemOptionDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,5 +41,11 @@ public interface ItemMapper {
 //    가게 id로 상품들 조회
 
 //    카테고리 id로 상품들 조회
+
+//    특정 상품과 같은 카테고리의 상품 조회
+    public List<ItemDTO> selectSameCategoryItems(
+            @Param("categoryId") Long categoryId,
+            @Param("subCategoryId") Long subCategoryId,
+            @Param("thisItemId") Long thisItemId);
 
 }

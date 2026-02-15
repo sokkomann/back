@@ -11,7 +11,7 @@ import java.util.List;
 
 @SpringBootTest
 @Slf4j
-public class FileItemMapperTest {
+public class FileItemMapperTests {
 
     @Autowired
     private FileItemMapper fileItemMapper;
@@ -19,8 +19,8 @@ public class FileItemMapperTest {
     @Test
     public void testInsert() {
         FileItemDTO fileItemDTO = new FileItemDTO();
-        fileItemDTO.setId(1L);
-        fileItemDTO.setItemId(5L);
+        fileItemDTO.setId(17L);
+        fileItemDTO.setItemId(7L);
         fileItemDTO.setFileItemType(FileItemType.THUMBNAIL);
 
         fileItemMapper.insert(fileItemDTO.toFileItemVO());

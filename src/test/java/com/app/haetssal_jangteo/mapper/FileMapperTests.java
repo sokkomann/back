@@ -1,6 +1,5 @@
 package com.app.haetssal_jangteo.mapper;
 
-import com.app.haetssal_jangteo.common.enumeration.FileItemType;
 import com.app.haetssal_jangteo.common.enumeration.Filetype;
 import com.app.haetssal_jangteo.dto.FileDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class FileMapperTest {
+public class FileMapperTests {
 
     @Autowired
     private FileMapper fileMapper;
@@ -19,9 +18,9 @@ public class FileMapperTest {
     public void testInsert() {
         FileDTO fileDTO = new FileDTO();
         fileDTO.setFileType(Filetype.IMAGE);
-        fileDTO.setFileName("userProfile");
-        fileDTO.setFileOriginName("originProfile");
-        fileDTO.setFileSavedPath("../../path");
+        fileDTO.setFileName("itemImages");
+        fileDTO.setFileOriginName("originProfile3");
+        fileDTO.setFileSavedPath("../../path3");
         fileDTO.setFileSize("10000");
 
         fileMapper.insert(fileDTO);
