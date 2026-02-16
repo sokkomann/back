@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품등록이요</title>
     <link rel="stylesheet" href="/css/item/item-write.css">
 </head>
 <body>
@@ -31,38 +30,34 @@
                                         </a>
                                     </div>
                                     <div class="header-btn-wrap">
-                                        <button type="button" class="application-btn">상품 등록</button>
+                                        <button type="button" class="application-btn">상품 수정</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="top-contents-container">
                                 <div class="top-contents-wrap">
-                                    <div>상품 등록</div>
+                                    <div>상품 수정</div>
                                     <div class="top-right-text-wrap">
-                                        <div class="top-right-text">햇살장터에 상품을 등록하고 전국의 소비자들과 연결되기</div>
+                                        <div class="top-right-text">
+                                            더 확실하고<br>
+                                            더 정확하고<br>
+                                            더 투명하게
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="navigation-bar">
-                                <div class="navigation-wrap">
-                                    <ul class="navigation-tabs">
-                                        <li class="navi-each-tab">
-                                            <div class="navi-each-name">상품 등록</div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 본문화면 -->
                         <div class="main-contents-container">
-                            <div class="main-wrap">
+                            <div th:object="${item}" class="main-wrap">
 
                                 <!-- form -->
-                                <form name="itemDTO" action="/item/write" method="post" enctype="multipart/form-data">
+                                <form name="itemDTO" action="/item/update" method="post" enctype="multipart/form-data">
 
-                                    <!-- 상품에 대한 가게 id 받는 곳 -->
-                                    <input type="hidden" />
+                                    <!-- 상품에 대한 id, 가게 id 받는 곳 -->
+                                    <input type="hidden" name="id" th:value="*{id}" />
+                                    <input type="hidden" name="itemStoreId" th:value="*{storeId}"/>
 
                                     <!-- 상품명 부분 -->
                                     <div id="item-name" class="each-content-container">
@@ -74,19 +69,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="explanation-left">판매 하려는 상품의 이름을 입력해주세요.</div>
+                                            <div class="explanation-left">
+                                                상품의 제목을 재작성합니다.
+                                            </div>
                                         </div>
                                         <div class="each-right-form">
                                             <div class="form-container">
                                                 <div>
                                                     <div class="form-wrap">
                                                         <span class="input-wrap">
-                                                            <input id="itemName" class="item-input" maxlength="20" name="itemName" type="text" inputmode="text" placeholder="상품명을 입력해주세요." autocapitalize="off" autocomplete="off" required>
+                                                            <input id="itemName" class="item-input" maxlength="20" name="itemName" type="text" inputmode="text" th:value="*{itemName}" autocapitalize="off" autocomplete="off" required>
                                                         </span>
                                                     </div>
                                                     <div class="input-length-guide">
-
-                                                        <!-- 입력값없을때  -->
                                                         <p class="input-guide-message">필수 항목입니다.</p>
                                                         <span class="input-count-length">0/20</span>
                                                     </div>
@@ -105,14 +100,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="explanation-left">상품의 성격과 가장 일치하는 카테고리를 선택해주세요. 적합하지 않을 경우 운영자에 의해 조정될 수 있습니다.</div>
+                                            <div class="explanation-left">
+                                                상품의 카테고리를 재조정 합니다.
+                                            </div>
                                         </div>
                                         <div class="each-right-form">
                                             <div class="category-option-container">
                                                 <p class="category-label">카테고리</p>
                                                 <!-- 진짜 카테고리 값 -->
-                                                <input type="hidden" id="itemCategoryId" name="itemCategoryId" value="">
-                                                <input type="hidden" id="itemSubCategoryId" name="itemSubCategoryId" value="">
+                                                <input type="hidden" id="itemCategoryId" name="itemCategoryId" th:value="*{itemCategoryId}">
+                                                <input type="hidden" id="itemSubCategoryId" name="itemSubCategoryId" th:value="*{itemSubCategoryId}">
                                                 <div class="category-select-box">
                                                     <span class="category-input-wrapper">
                                                         <input id="itemCategory" readonly type="text" inputmode="text" autocapitalize="off" autocomplete="off" class="category-input" value="카테고리를 선택해주세요">
@@ -158,14 +155,14 @@
                                             <div class="each-left-wrap">
                                                 <div class="each-left-content">상품 소개</div>
                                             </div>
-                                            <div class="explanation-left">판매 하려는 상품을 구매자 분들이 한눈에 알 수 있도록 간략하게 소개해주세요.</div>
+                                            <div class="explanation-left">판매 하려는 상품의 설명을 재작성 합니다.</div>
                                         </div>
                                         <div class="each-right-form">
                                             <div class="form-container">
                                                 <div>
                                                     <div class="form-wrap">
                                                         <div class="textarea-wrapper">
-                                                            <textarea id="itemContent" name="itemContent" minlength="10" maxlength="50" class="item-textarea" placeholder="간단한 상품의 소개를 작성해주세요"></textarea>
+                                                            <textarea id="itemContent" name="itemContent" minlength="10" maxlength="50" class="item-textarea" th:text="*{itemContent}"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="input-length-guide">
@@ -189,7 +186,7 @@
                                                 </div>
                                             </div>
                                             <div class="explanation-left">
-                                                판매 하려는 상품의 가격을 입력해주세요.<br>
+                                                판매 하려는 상품의 가격을 재입력해주세요.<br>
                                                 추가적인 상품 옵션이 있을 경우, 최저가를 입력해주세요.
                                             </div>
                                         </div>
@@ -198,7 +195,7 @@
                                                 <div>
                                                     <div class="form-wrap">
                                                         <span class="input-wrap">
-                                                            <input id="itemPrice" name="itemPrice" class="item-input" type="text" placeholder="판매가를 입력해주세요." autocapitalize="off" autocomplete="off">
+                                                            <input id="itemPrice" name="itemPrice" class="item-input" type="text" th:value="*{itemPrice}" autocapitalize="off" autocomplete="off">
                                                         </span>
                                                     </div>
                                                     <div class="input-length-guide">
@@ -220,14 +217,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="explanation-left">판매 하려는 상품의 수량을 입력해주세요.</div>
+                                            <div class="explanation-left">판매 하려는 상품의 수량을 재입력해주세요.</div>
                                         </div>
                                         <div class="each-right-form">
                                             <div class="form-container">
                                                 <div>
                                                     <div class="form-wrap">
                                                         <span class="input-wrap">
-                                                            <input id="itemStock" name="itemStock" class="item-input" type="text" inputmode="text" placeholder="상품 수량을 입력해주세요." autocapitalize="off" autocomplete="off">
+                                                            <input id="itemStock" name="itemStock" class="item-input" type="text" inputmode="text" th:value="*{itemStock}" autocapitalize="off" autocomplete="off">
                                                         </span>
                                                     </div>
                                                     <div class="input-length-guide">
@@ -261,7 +258,6 @@
                                                         <button class="reset-btn off">
                                                             초기화
                                                         </button>
-
                                                     </div>
                                                     <p>
                                                         파일 형식은 jpg 또는 png 또는 gif로,<br>
@@ -272,10 +268,14 @@
 
                                                 <div class="img-wrapper">
                                                     <div class="img-container">
-                                                        <!-- 이미지 최대 5장 까지만 -->
+                                                        <th:block th:each="itemThumbnail, status : *{itemThumbnails}">
+                                                            <div class="img-box" th:data-index="${status.index}">
+                                                                <img th:id="${itemThumbnail.id}" th:src="@{/api/files/display(filePath=${itemThumbnail.fileSavedPath}, fileName=${itemThumbnail.fileName})}">
+                                                            </div>
+                                                        </th:block>
                                                     </div>
                                                     <p class="off">
-                                                        파일을 더블 클릭하면 원본 크기의 이미지를 확인할 수 있으며,<br>
+                                                        파일을 꾹 누르면 원본 크기의 이미지를 확인할 수 있으며,<br>
                                                         첫번째 이미지가 썸네일로 사용됩니다.
                                                     </p>
                                                 </div>
@@ -324,7 +324,11 @@
 
                                                     <!-- 올라온 이미지를 배치 3장 까지만 -->
                                                     <div class="uploader-preview">
-
+                                                        <th:block th:each="itemDescImage, status : ${descImages.itemDescImages}">
+                                                            <div class="img-box" th:data-index="${status.index}">
+                                                                <img th:id="${itemDescImage.id}" th:src="@{/api/files/display(filePath=${itemDescImage.fileSavedPath}, fileName=${itemDescImage.fileName})}">
+                                                            </div>
+                                                        </th:block>
                                                     </div>
                                                 </div>
                                             </div>
@@ -352,7 +356,11 @@
 
                                                     <!-- 올라온 이미지를 배치 3장 까지만 -->
                                                     <div class="uploader-preview">
-
+                                                        <th:block th:each="itemSellerImage, status : ${descImages.itemSellerImages}">
+                                                            <div class="img-box" th:data-index="${status.index}">
+                                                                <img th:id="${itemSellerImage.id}" th:src="@{/api/files/display(filePath=${itemSellerImage.fileSavedPath}, fileName=${itemSellerImage.fileName})}">
+                                                            </div>
+                                                        </th:block>
                                                     </div>
                                                 </div>
                                             </div>
@@ -380,9 +388,12 @@
 
                                                     <!-- 올라온 이미지를 배치 3장 까지만 -->
                                                     <div class="uploader-preview">
-
+                                                        <th:block th:each="itemRefundImage, status : ${descImages.itemRefundImages}">
+                                                            <div class="img-box" th:data-index="${status.index}">
+                                                                <img th:id="${itemRefundImage.id}" th:src="@{/api/files/display(filePath=${itemRefundImage.fileSavedPath}, fileName=${itemRefundImage.fileName})}">
+                                                            </div>
+                                                        </th:block>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -406,17 +417,34 @@
 
                                                 <!-- 추가된 옵션 뿌리기 -->
                                                 <!-- 옵션이 없으면 안보이기 -->
-                                                <div class="item-option-list off">
-
+                                                <div th:class="${!item.itemOptions.isEmpty() ? 'item-option-list' : 'item-option-list off'}">
                                                     <!-- 헤더 -->
                                                     <div class="option-text">추가된 상품 옵션</div>
 
                                                     <!-- 추가된 옵션 -->
                                                     <div class="option-list-container">
                                                         <!-- -->
-                                                        <div class="option-group">
-
-                                                        </div>
+                                                        <th:block th:if="*{!itemOptions.isEmpty()}">
+                                                            <div th:each="option, status: *{itemOptions}" class="option-group">
+                                                                <div class="option-group-upper">
+                                                                    <input class="option-name" type="text" th:name="|itemOptions[${status.index}].optionName|" th:value="${option.optionName}" readonly>
+                                                                    <input class="option-detail" type="text" th:name="|itemOptions[${status.index}].optionDetail|" th:value="${option.optionDetail}" readonly>
+                                                                </div>
+                                                                <div class="option-group-bottom">
+                                                                    <label class="option-label"> 가격
+                                                                        <input class="option-price" type="text" th:name="|itemOptions[${status.index}].optionPrice|" th:value="${option.optionPrice}" readonly>
+                                                                    </label>
+                                                                    <label class="option-label"> 재고
+                                                                        <input class="option-stock" type="text" th:name="|itemOptions[${status.index}].optionStock|" th:value="${option.optionStock}" readonly>
+                                                                    </label>
+                                                                </div>
+                                                                <button th:id="${option.id}" type="button" class="option-delete-button" th:data-index="${status.index}">
+                                                                    <div class="option-delete-icon">
+                                                                        <svg viewBox="0 0 48 48"><path fill-rule="evenodd" clip-rule="evenodd" d="M38.814 42.172C38.814 42.946 38.064 43.574 37.144 43.574H10.856C9.936 43.574 9.186 42.946 9.186 42.172V12.218H38.814V42.172ZM17.564 4.426L30.542 4.524V9.794H17.462L17.564 4.426ZM44.786 9.794H32.968V4.524C32.968 3.13 31.832 2 30.436 2H17.564C16.168 2 15.03 3.13 15.03 4.524V9.794H3.212C2.542 9.794 2 10.336 2 11.006C2 11.676 2.542 12.218 3.212 12.218H6.76V42.172C6.76 44.284 8.598 46 10.856 46H37.144C39.402 46 41.24 44.284 41.24 42.172V12.218H44.786C45.456 12.218 46 11.676 46 11.006C46 10.336 45.456 9.794 44.786 9.794ZM18.857 36.9338C19.527 36.9338 20.069 36.3918 20.069 35.7218V20.0738C20.069 19.4038 19.527 18.8618 18.857 18.8618C18.187 18.8618 17.645 19.4038 17.645 20.0738V35.7218C17.645 36.3918 18.187 36.9338 18.857 36.9338ZM30.3542 35.7218C30.3542 36.3918 29.8122 36.9338 29.1422 36.9338C28.4722 36.9338 27.9302 36.3918 27.9302 35.7218V20.0738C27.9302 19.4038 28.4722 18.8618 29.1422 18.8618C29.8122 18.8618 30.3542 19.4038 30.3542 20.0738V35.7218Z"></path></svg>
+                                                                    </div>
+                                                                </button>
+                                                            </div>
+                                                        </th:block>
                                                         <!-- -->
                                                     </div>
                                                 </div>
@@ -527,6 +555,6 @@
         </div>
     </div>
 </body>
-<script src="/js/item/event/item-write.js"></script>
+<script src="/js/item/event/item-update.js"></script>
 <script src="/js/item/event/item-option-modal.js"></script>
 </html>

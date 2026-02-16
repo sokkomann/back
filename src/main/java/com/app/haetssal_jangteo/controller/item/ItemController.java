@@ -1,6 +1,7 @@
 package com.app.haetssal_jangteo.controller.item;
 
 import com.app.haetssal_jangteo.dto.ItemDTO;
+import com.app.haetssal_jangteo.dto.ItemDescImageDTO;
 import com.app.haetssal_jangteo.dto.ItemDetailDTO;
 import com.app.haetssal_jangteo.service.item.ItemService;
 import jakarta.servlet.http.HttpSession;
@@ -36,7 +37,7 @@ public class ItemController {
                               RedirectAttributes redirectAttributes) {
         itemService.save(itemDTO, itemThumbnails, itemDescImages, itemSellerImages, itemRefundImages);
         redirectAttributes.addAttribute("id", itemDTO.getId());
-        return new RedirectView("/detail");
+        return new RedirectView("/item/detail");
     }
 
     @GetMapping("/detail")
@@ -49,8 +50,10 @@ public class ItemController {
 
     @GetMapping("/update")
     public String goToUpdate(Long id, Model model) {
-        ItemDetailDTO item = itemService.detail(id);
+        ItemDetailDTO item = itemService.detail(id); // 상품 상세 정보
+        ItemDescImageDTO descImages = itemService.getItemDescImages(id); // 상품 설명 이미지들
         model.addAttribute("item", item);
+        model.addAttribute("descImages", descImages);
         return "item/item-update";
     }
 
@@ -64,7 +67,7 @@ public class ItemController {
                                ) {
         itemService.update(itemDTO, itemThumbnails, itemDescImages, itemSellerImages, itemRefundImages);
         redirectAttributes.addAttribute("id", itemDTO.getId());
-        return new RedirectView("/item/item-detail");
+        return new RedirectView("/item/detail");
     }
 
     @GetMapping("delete")

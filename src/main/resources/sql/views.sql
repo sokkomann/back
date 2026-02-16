@@ -54,7 +54,9 @@ select
     i.item_content,
     i.item_view_count,
 
+    c.id as itemCategoryId,
     c.category_name as itemCategoryName,
+    sc.id as itemSubCategoryId,
     sc.category_name as itemSubCategoryName,
 
     s.id as storeId,

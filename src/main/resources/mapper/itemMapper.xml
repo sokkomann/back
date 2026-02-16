@@ -16,7 +16,10 @@
         set item_name = #{itemName},
             item_price = #{itemPrice},
             item_stock = #{itemStock},
-            item_content = #{itemContent}
+            item_content = #{itemContent},
+            item_category_id = #{itemCategoryId},
+            item_subcategory_id = #{itemSubCategoryId},
+            updated_datetime = current_timestamp
         where id = #{id}
     </update>
 

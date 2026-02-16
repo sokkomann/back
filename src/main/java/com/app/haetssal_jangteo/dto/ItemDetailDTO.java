@@ -12,7 +12,9 @@ public class ItemDetailDTO {
     private Long id;
 
     // 상품 기본 정보
+    private Long itemCategoryId;
     private String itemCategoryName;
+    private Long itemSubCategoryId;
     private String itemSubCategoryName;
     private String itemName;
     private String itemPrice;
