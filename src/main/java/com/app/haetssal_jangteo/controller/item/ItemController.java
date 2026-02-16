@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/item/**")
 @RequiredArgsConstructor
 public class ItemController {
-    private final HttpSession session;
     private final ItemService itemService;
 
     @GetMapping("/write")

@@ -53,6 +53,7 @@ create table tbl_store (
     id bigint unsigned auto_increment PRIMARY KEY,
     store_market_id bigint unsigned NOT NULL,
     store_owner_id bigint unsigned NOT NULL,
+    store_category_id bigint unsigned not null,
     store_name varchar(255) NOT NULL,
     store_intro longtext NOT NULL,
     store_address varchar(255) NOT NULL,
@@ -64,7 +65,9 @@ create table tbl_store (
     constraint fk_market_store foreign key(store_market_id)
     references tbl_market (id),
     constraint fk_owner_user foreign key (store_owner_id)
-    references tbl_user (id)
+    references tbl_user (id),
+    constraint fk_store_category foreign key (store_category_id)
+    references tbl_category (id)
 );
 
 -- 카테고리 테이블

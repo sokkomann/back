@@ -10,30 +10,33 @@ import java.util.Optional;
 @Mapper
 public interface StoreMapper {
 //    가게 등록
-    public void insert(StoreDTO storeDTO);
+    public void insert(StoreVO storeVO);
 
 //    가게 정보 수정
-    public void update(StoreDTO storeDTO);
+    public void update(StoreVO storeVO);
 
 //    가게 상태 변경 (CLOSE, DENIED)
-    public void updateState(StoreDTO storeDTO);
+    public void updateState(StoreVO storeVO);
 
 //    가게 등록 승인
-    public void updateIsConfirmed(StoreDTO storeDTO);
+    public void updateIsConfirmed(Long id);
 
-//    전체 가게 검색
+//    전체 가게 조회
     public List<StoreVO> selectAll();
 
-//    장터 id로 가게들 검색
-    public List<StoreVO> selectByMarketId(Long storeMarketId);
+//    장터 id로 소속 가게들 조회
+    public List<StoreVO> selectByMarketId(Long marketId);
 
-//    id로 가게 검색
+//    id로 가게 조회
     public Optional<StoreVO> selectById(Long id);
 
-//    가게 이름으로 가게 검색
+//    가게 이름으로 가게 조회
     public Optional<StoreVO> selectByStoreName(String storeName);
 
-//    소유주 id로 가게 검색
+//    가게 소유주 id로 가게 조회
     public Optional<StoreVO> selectByStoreOwnerId(Long storeOwnerId);
+
+//    가게 비활성화
+    public void delete(Long id);
 
 }

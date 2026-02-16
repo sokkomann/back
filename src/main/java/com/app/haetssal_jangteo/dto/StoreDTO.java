@@ -11,6 +11,7 @@ public class StoreDTO {
     private Long id;
     private Long storeMarketId;
     private Long storeOwnerId;
+    private Long storeCategoryId;
     private String storeName;
     private String storeIntro;
     private String storeAddress;
@@ -25,6 +26,7 @@ public class StoreDTO {
                 .id(id)
                 .storeMarketId(storeMarketId)
                 .storeOwnerId(storeOwnerId)
+                .storeCategoryId(storeCategoryId)
                 .storeName(storeName)
                 .storeIntro(storeIntro)
                 .storeAddress(storeAddress)
