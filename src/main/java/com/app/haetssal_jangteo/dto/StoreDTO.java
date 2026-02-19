@@ -12,6 +12,7 @@ public class StoreDTO {
     private Long storeMarketId;
     private Long storeOwnerId;
     private Long storeCategoryId;
+    private String storeCategoryName;
     private String storeName;
     private String storeIntro;
     private String storeAddress;
@@ -24,7 +25,7 @@ public class StoreDTO {
     // 가게 프로필 이미지
     private String fileName;
     private String fileOriginName;
-    private String fileSavePath;
+    private String fileSavedPath;
 
     // 삭제할 상점 이미지 id
     private String toDeleteFileId;

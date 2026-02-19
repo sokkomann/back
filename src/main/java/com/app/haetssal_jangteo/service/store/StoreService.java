@@ -158,6 +158,11 @@ public class StoreService {
         return storeWithPagingDTO;
     }
 
+    // 검색 값에 따른 가게 수 조회
+    public int findTotal(StoreSearch storeSearch) {
+        return storeDAO.findTotal(storeSearch);
+    }
+
     // 장터 id로 소속 가게들 조회
 
     // id로 가게 조회

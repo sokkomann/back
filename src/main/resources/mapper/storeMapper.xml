@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.haetssal_jangteo.mapper.StoreMapper">
-    <sql id="storeSearch">
+    <sql id="search">
         <trim prefix="(" prefixOverrides="and" suffix=")">
-            <if test="storeSearch.region != null and storeSearch.region != ''.toString()">
-                and store_address like concat('%', #{storeSearch.region}, '%')
+            <if test="search.region != null and search.region != ''.toString()">
+                <if test="search.region != '전체'">
+                    and store_address like concat('%', #{search.region}, '%')
+                </if>
             </if>
-            <if test="storeSearch.categoryId != null">
-                and store_category_id = #{storeSearch.categoryId}
+            <if test="search.categoryId != null">
+                and store_category_id = #{search.categoryId}
             </if>
-            <if test="storeSearch.marketId != null">
-                and store_market_id = #{storeSearch.marketId}
+            <if test="search.marketId != null">
+                and store_market_id = #{search.marketId}
             </if>
-            <if test="storeSearch.state != null and storeSearch.state != ''.toString()">
-                and store_state = #{storeSearch.state}
+            <if test="search.state != null and search.state != ''.toString()">
+                and store_state = #{search.state}
             </if>
         </trim>
+    </sql>
+
+    <sql id="orderBy">
         <choose>
-            <when test="storeSearch.order == 'asc'">
+            <when test="search.orderValue == 'asc'">
                 order by store_name asc
             </when>
-            <when test="storeSearch.order == 'desc'">
+            <when test="search.orderValue == 'desc'">
                 order by store_name desc
             </when>
             <otherwise>
@@ -69,15 +74,19 @@
             s.id, s.store_name, s.store_address, s.store_category_id,
             s.store_state, s.store_market_id, s.store_intro,
 
+            c.category_name as storeCategoryName,
+
             f.file_name as fileName,
             f.file_origin_name as fileOriginName,
             f.file_saved_path as fileSavePath
         from tbl_store s
+        join tbl_category c on s.store_category_id = c.id
         left join tbl_file_store fs on s.id = fs.store_id
         left join tbl_file f on f.id = fs.id
         <where>
-            <include refid="storeSearch"></include>
+            <include refid="search"></include>
         </where>
+        <include refid="orderBy"></include>
         limit #{criteria.count} offset #{criteria.offset}
     </select>
     
@@ -85,8 +94,9 @@
         select count(*)
         from tbl_store
         <where>
-            <include refid="storeSearch"></include>
+            <include refid="search"></include>
         </where>
+        <include refid="orderBy"></include>
     </select>
 
     <update id="update">

@@ -13,5 +13,5 @@ public class StoreSearch {
     private Long categoryId; // 카테고리 id
     private Long marketId; // 장터 id
     private String state; // 가게 상태
-    private String order; // 정렬 값
+    private String orderValue; // 정렬 값
 }

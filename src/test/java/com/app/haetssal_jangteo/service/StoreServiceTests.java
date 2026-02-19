@@ -64,7 +64,7 @@ public class StoreServiceTests {
         storeSearch.setRegion("서울");
         storeSearch.setMarketId(4L);
         storeSearch.setCategoryId(200L);
-        storeSearch.setOrder("desc");
+        storeSearch.setOrderValue("desc");
 
         StoreWithPagingDTO storeWithPagingDTO = new StoreWithPagingDTO();
         Criteria criteria = new Criteria(1, storeDAO.findTotal(storeSearch));

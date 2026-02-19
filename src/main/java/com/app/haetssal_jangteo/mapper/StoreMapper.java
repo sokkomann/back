@@ -40,7 +40,7 @@ public interface StoreMapper {
     public Optional<StoreVO> selectByStoreOwnerId(Long storeOwnerId);
 
 //    검색 값에 따라 가게 조회
-    public List<StoreDTO> selectBySearch(@Param("criteria")Criteria criteria, @Param("search") StoreSearch storeSearch);
+    public List<StoreDTO> selectBySearch(@Param("criteria")Criteria criteria, @Param("search")StoreSearch storeSearch);
 
 //    검색 값으로 조회된 가게 수 조회
     public int selectTotal(@Param("search") StoreSearch storeSearch);

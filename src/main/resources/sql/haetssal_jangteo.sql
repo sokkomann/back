@@ -40,6 +40,7 @@ create table tbl_market (
                             id bigint unsigned PRIMARY KEY,
                             market_region varchar(100) NOT NULL,
                             market_name varchar(255) NOT NULL,
+                            market_location varchar(255) NOT NULL,
                             market_state enum('active', 'inactive') default 'active',
                             created_datetime datetime default current_timestamp,
                             updated_datetime datetime default current_timestamp

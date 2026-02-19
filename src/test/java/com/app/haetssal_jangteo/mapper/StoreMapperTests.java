@@ -82,12 +82,10 @@ public class StoreMapperTests {
 
     @Test
     public void testSelectBySearch() {
-        Criteria criteria = new Criteria(1, 10);
         StoreSearch storeSearch = new StoreSearch();
-        storeSearch.setRegion("서울");
-        storeSearch.setMarketId(4L);
-        storeSearch.setCategoryId(200L);
-        storeSearch.setOrder("desc");
+        storeSearch.setRegion("전체");
+        storeSearch.setOrderValue("desc");
+        Criteria criteria = new Criteria(1, storeMapper.selectTotal(storeSearch));
 
         List<StoreDTO> foundStores = storeMapper.selectBySearch(criteria, storeSearch);
         log.info("{}....", foundStores);
@@ -96,10 +94,6 @@ public class StoreMapperTests {
     @Test
     public void selectTotal() {
         StoreSearch storeSearch = new StoreSearch();
-        storeSearch.setRegion("서울");
-        storeSearch.setMarketId(4L);
-        storeSearch.setCategoryId(200L);
-        storeSearch.setOrder("desc");
         int count = storeMapper.selectTotal(storeSearch);
 
         log.info("{}.....", count);
